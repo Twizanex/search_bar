@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Search bar</title>
+        <style>
+            #text_field1{
+            	z-index:11;
+            	position:absolute;
+            	left:0;
+            	top:0;
+            	background:transparent;
+            	border:1px solid;
+            }
+            #text_field2{
+            	z-index:10;
+            	position:absolute;
+            	left:0;
+            	top:0;
+            	background:transparent;
+            	border:1px solid;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="search_bar">
+            <form id="myform" action="#" onsubmit="search();">
+                <input type="text" id="text_field1" onkeyup="show_suggestion();"/>
+                <input type="text" id="text_field2" disabled="disabled" ><br>
+                <input type="submit" id="submit_button" value="search"/>
+            </form>
+            <div id="search"></div>
+            <script>
+                var list=[
+                	"A#","A++","ABAP","ABC","ActionScript","Ada","AppleScript","Asp","Bash","BASIC","Boomerang","Bourne Shell","BPEL","C","C--","C++","C#","C Shell","Clojure","COBOL","ColdFusion","Curry","Dart","Datalog","Dynamo","E#","ECMAscript","EPSOL","Erlang","Factor","FFP","Fortran","Google Apps Script","GOTRAN","GRASS","Groovy","Hamilton C shell","Haskell","HyperTalk","IBM RPG","ISLISP","JADE","Java","Javascript","KRYPTON","Ladder","Legoscript","Lisp","Machine code","MUMPS","NATURAL","Net.Data","Octave","Oxygene","Perl","PHP","Python","Qtscript","REBOL","ROOP","Ruby","Sabre talk","Scala","SuperCollider","SYMPL","TACPOL","Turbo c++","Unix shell","UnrealScript","VBScript","Visual Fortran","Visual J++","WebQl","Wolfram","X10","Xtend","YQL","Zeno","ZOPL"
+                ];
+                document.getElementById("text_field2").value="Type Something";
+                document.getElementById("text_field1").value="";
+                var length_of_array=list.length;
+                var input="";
+                function show_suggestion(){
+                	var i=0;
+                	input=document.getElementById("text_field1").value;
+                	for(i=0;i<length_of_array;i++){
+                		var str=list[i];
+                		var str1=str.toUpperCase();
+                		var input1=input.toUpperCase();
+                		if(str1.indexOf(input1)==0){
+                			break; 
+                   		}
+                	}
+                	var j=input.length;
+                	var temp1=input.substring(0,j);
+                	var temp2=str.substring(j);
+                	var temp3=temp1+temp2;//alert(temp3);
+                	document.getElementById("text_field2").value=temp3;
+                	if(input==""||i==length_of_array)
+                	    document.getElementById("text_field2").value="";
+                	
+                }
+                function search(){
+                	document.getElementById("search").innerHTML="Search result for "+input+" goes here";
+                }
+            </script>
+        </div>
+    </body>
+</html>
